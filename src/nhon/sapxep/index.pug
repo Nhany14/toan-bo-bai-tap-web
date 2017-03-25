@@ -1,0 +1,21 @@
+-
+  const {join} = require('path')
+  const {readFileSync} = require('fs')
+  const listsource = readFileSync(join(lib, 'cuong', 'search', 'list.yaml')).toString('utf8')
+  const list = listsource.split('\n').map(string => string.trim().slice(2)).filter(Boolean)
+
+html(lang = 'vi')
+  head
+    meta(charset = 'utf-8')
+    title Sắp xếp
+  body
+    #control-container
+      label(for = 'sort-order') Thứ tự sắp xếp
+      select#sort-order
+        option(value = 'ascending' checked) A-Z
+        option(value = 'descending') Z-A
+    #content-container
+      ul
+        each item in list
+          li= item
+    script(type = 'text/javascript' src = 'script.js')
