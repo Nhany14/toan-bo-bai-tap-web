@@ -1,0 +1,29 @@
+-
+  const {join} = require('path')
+  const {readFileSync} = require('fs')
+  const listsource = readFileSync(join(lib, 'cuong', 'search', 'list.yaml')).toString('utf8')
+  const list = listsource.split('\n').map(string => string.trim().slice(2)).filter(Boolean)
+html(lang = 'vi')
+  head
+    meta(charset = 'utf-8')
+    title Sắp xếp theo cập
+  body
+    #control-container
+      label(for = 'sort-order') Thứ tự sắp xếp
+      select#sort-order
+        option(value = 'ascending' checked) A-Z
+        option(value = 'descending') Z-A
+    #content-container
+      ul
+        //-
+          Câu lệnh sau đây tạo ra một danh sách các cặp phần phần tử <li>:
+          - Một phần tử chứa số (li.index) được đặt trước
+          - Một phần tử chứa tên hoa (li.value) được đặt sau
+          Nhiệm vụ
+          - Sắp xếp danh sách các cặp (li.index, li.value) theo thứ tự A-Z/Z-A (value của select#sort-order)
+          - Đảm bảo các cặp phần tử không xáo trộn: li.index đứng trước li.value nào thì sau khi sắp xếp vẫn tiếp tục đứng trước li.value đấy
+        - for (const index in list)
+          li.index= index
+          li.value= list[index]
+    script(type = 'text/javascript' src = 'script.js')
+ 
